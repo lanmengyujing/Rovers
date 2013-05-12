@@ -35,17 +35,19 @@ public class MarRoversTest {
     }
 
     @Test
-    public void should_OutPut_Be_14W_When_Input_Rover_23N_Instruction_LMRML(){
-
-    }
-
-    @Test
     public void should_OutPut_Be_12N_When_Input_Rover_13N_Instruction_LMLMLMLMM(){
-
+        marRovers.setInstruction("1 2 N");
+        marRovers.executeInstruction("LMLMLMLMM");
+        assertThat(marRovers.getOutput(), is("1 3 N"));
     }
 
     @Test
     public void should_OutPut_Be_51E_When_Input_Rover_33E_Instruction_MMRMMRMRRM(){
+
+    }
+
+    @Test
+    public void should_OutPut_Be_14W_When_Input_Rover_23N_Instruction_LMRML(){
 
     }
 }
