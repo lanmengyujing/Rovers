@@ -3,7 +3,6 @@ package model;
 import exception.CrashException;
 import exception.GameException;
 import exception.OutOfBoundException;
-import model.MarRovers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -93,6 +92,6 @@ public class MarRoversTest {
         marRovers.executeInstruction("m");
         marRovers.setInstruction("1 3 s");
         marRovers.executeInstruction("m");
-        expectedEx.expectMessage("rover out of bound!");
+        expectedEx.expectMessage("Rovers crash each other");
     }
 }

@@ -2,7 +2,6 @@ package model;
 
 import exception.CrashException;
 import exception.GameException;
-import exception.OutOfBoundException;
 import state.*;
 
 import java.util.ArrayList;
