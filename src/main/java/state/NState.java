@@ -15,8 +15,4 @@ public class NState implements State {
         return 'N';
     }
 
-    @Override
-    public void move() {
-
-    }
 }
