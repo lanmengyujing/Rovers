@@ -1,4 +1,7 @@
+package model;
+
 import exception.OutOfBoundException;
+import model.MarRovers;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;

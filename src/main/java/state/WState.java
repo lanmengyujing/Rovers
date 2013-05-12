@@ -1,5 +1,7 @@
 package state;
 
+import model.Rover;
+
 public class WState implements State{
     @Override
     public State turnRight() {
@@ -15,4 +17,6 @@ public class WState implements State{
     public char getDirection() {
         return 'W';
     }
+
+
 }

@@ -14,4 +14,9 @@ public class NState implements State {
     public char getDirection() {
         return 'N';
     }
+
+    @Override
+    public void move() {
+
+    }
 }

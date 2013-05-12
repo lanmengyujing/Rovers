@@ -1,3 +1,5 @@
+package model;
+
 import exception.OutOfBoundException;
 import state.*;
 
