@@ -11,6 +11,6 @@ public class Plateau {
     }
 
     public boolean isOutRange(int x, int y) {
-        return !((x <= posX) && (y <= posY));
+        return !(x >= 0 && y >= 0 && (x <= posX) && (y <= posY));
     }
 }
