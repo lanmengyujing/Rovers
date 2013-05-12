@@ -1,8 +1,6 @@
 package model;
 
-import exception.CrashException;
-import exception.GameException;
-import exception.OutOfBoundException;
+import exception.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -18,7 +16,7 @@ public class MarRoversTest {
     public ExpectedException expectedEx = ExpectedException.none();
 
     @Before
-    public void setup()  {
+    public void setup() throws PlateauInitException {
         marRovers = new MarRovers();
         marRovers.initPlateau("10 10");
     }
@@ -93,5 +91,30 @@ public class MarRoversTest {
         marRovers.setInstruction("1 3 s");
         marRovers.executeInstruction("m");
         expectedEx.expectMessage("Rovers crash each other");
+    }
+
+    @Test(expected = PlaceRoverCommandException.class)
+    public void should_instruction_wrong_when_input_11h() throws GameException {
+        marRovers.setInstruction("1 1 h");
+        expectedEx.expectMessage("The input position or orientation for rover is not valid! try again");
+    }
+
+    @Test(expected = WrongCommandException.class)
+    public void should_command_wrong_when_input_MP9RL() throws GameException {
+        marRovers.setInstruction("1 1 N");
+        marRovers.executeInstruction("P9R");
+        expectedEx.expectMessage("The input commands for rover are not valid!Please input commands as\"MRL\", try again");
+    }
+
+    @Test(expected = PlateauInitException.class)
+    public void should_plateau_init_wrong_when_input_p8() throws GameException {
+        marRovers.initPlateau("p 8");
+        expectedEx.expectMessage("The input area for Plateau is not valid! Please input two parameters as \"x y\" ,try again");
+    }
+
+    @Test(expected = PlateauInitException.class)
+    public void should_plateau_init_wrong_when_input_negative_2_8() throws GameException {
+        marRovers.initPlateau("-2 8");
+        expectedEx.expectMessage("The input area for Plateau is not valid! Please input two parameters as \"x y\" ,try again");
     }
 }
