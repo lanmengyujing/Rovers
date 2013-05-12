@@ -1,19 +1,15 @@
 import state.*;
 
 public class MarRovers {
-
-    private int posX;
-    private int posY;
-    private char direction;
+    private Rover rover;
     private Plateau plateau;
-    private State state;
 
     public void setInstruction(String instruction) {
         String[] instructions = instruction.split(" ");
-        posX = Integer.valueOf(instructions[0]);
-        posY = Integer.valueOf(instructions[1]);
-        direction = instructions[2].charAt(0);
-        state = getStateByChar(direction);
+        int posX = Integer.valueOf(instructions[0]);
+        int posY = Integer.valueOf(instructions[1]);
+        State state = getStateByChar(instructions[2].charAt(0));
+        rover = new Rover(posX, posY, state);
     }
 
     private State getStateByChar(char direction) {
@@ -32,34 +28,7 @@ public class MarRovers {
     }
 
     public void executeInstruction(String commandStr) {
-        commandStr = commandStr.toUpperCase();
-        for (char command : commandStr.toCharArray()) {
-            if (command == 'M') {
-                switch (state.getDirection()) {
-                    case 'N':
-                        posY++;
-                        break;
-                    case 'S':
-                        posY--;
-                        break;
-                    case 'E':
-                        posX++;
-                        break;
-                    case 'W':
-                        posX--;
-                        break;
-                    default:
-                        throw new AssertionError();
-                }
-            }
-            if (command == 'R') {
-                state = state.turnRight();
-            }
-            if (command == 'L') {
-                state = state.turnLeft();
-                System.out.println(state);
-            }
-        }
+        rover.executeInstruction(commandStr);
     }
 
     public void setPlateau(String plateauStr) {
@@ -70,7 +39,7 @@ public class MarRovers {
     }
 
     public String getOutput() {
-        char direction = state.getDirection();
-        return "" + posX + " " + posY + " " + direction;
+        return rover.getOutput();
     }
+
 }
