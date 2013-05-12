@@ -16,7 +16,7 @@ public class MarRoversTest {
     public ExpectedException expectedEx = ExpectedException.none();
 
     @Before
-    public void setup() throws PlateauInitException {
+    public void setup() throws GameException {
         marRovers = new MarRovers();
         marRovers.initPlateau("10 10");
     }

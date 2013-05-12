@@ -1,41 +1,32 @@
 package model;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.Match;
 import exception.*;
+import parser.CommandParser;import parser.Parser;
+import parser.PlaceParser;
+import parser.PlateauParser;
 import state.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MarRovers {
     private Rover rover;
     private Plateau plateau;
     List<Rover> roverList = new ArrayList<Rover>();
 
-    public void initPlateau(String plateauStr) throws PlateauInitException {
-        String regEx = "^\\s*\\d*+\\s+\\d*\\s*$";
-        Pattern pattern = Pattern.compile(regEx);
-        Matcher m = pattern.matcher(plateauStr);
-        if(!m.find()){
-            throw new PlateauInitException(PlateauInitException.PLATEAU_INIT_TIP);
-        }
+    public void initPlateau(String plateauStr) throws GameException {
+        Parser parser = new PlateauParser();
+        parser.matchCondition(plateauStr);
         String[] plateauInstruction = plateauStr.split(" ");
         int x = Integer.valueOf(plateauInstruction[0]);
         int y = Integer.valueOf(plateauInstruction[0]);
         plateau = new Plateau(x, y);
     }
 
-    public void setInstruction(String instructionStr) throws PlaceRoverCommandException {
+    public void setInstruction(String instructionStr) throws GameException {
         String instruction = instructionStr.toUpperCase();
-        String regEx = "^\\s*\\d*+\\s+\\d*+\\s+[N|S|W|E]\\s*$";
-        Pattern pattern = Pattern.compile(regEx);
-        Matcher m = pattern.matcher(instruction);
-        if(!m.find()){
-            throw new PlaceRoverCommandException(PlaceRoverCommandException.ROVER_INIT_TIP);
-        }
-
+        Parser parser = new PlaceParser();
+        parser.matchCondition(instruction);
         String[] instructions = instruction.split(" ");
         int posX = Integer.valueOf(instructions[0]);
         int posY = Integer.valueOf(instructions[1]);
@@ -62,12 +53,8 @@ public class MarRovers {
 
     public void executeInstruction(String commandStr) throws GameException {
         commandStr = commandStr.toUpperCase();
-        String regEx = "^[L|M|R]*$";
-        Pattern pattern = Pattern.compile(regEx);
-        Matcher m = pattern.matcher(commandStr);
-        if(!m.find()){
-            throw new WrongCommandException(WrongCommandException.COMMAND_TIP);
-        }
+        Parser parser = new CommandParser();
+         parser.matchCondition(commandStr);
         for (char command : commandStr.toCharArray()) {
             rover.executeInstruction(command);
             checkCrash(rover);
