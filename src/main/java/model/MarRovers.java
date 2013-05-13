@@ -54,7 +54,7 @@ public class MarRovers {
     public void executeInstruction(String commandStr) throws GameException {
         commandStr = commandStr.toUpperCase();
         Parser parser = new CommandParser();
-         parser.matchCondition(commandStr);
+        parser.matchCondition(commandStr);
         for (char command : commandStr.toCharArray()) {
             rover.executeInstruction(command);
             checkCrash(rover);

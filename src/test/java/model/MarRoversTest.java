@@ -71,14 +71,14 @@ public class MarRoversTest {
     }
 
     @Test(expected = OutOfBoundException.class)
-    public void should_rover_be_out_bound_when_move_beyond() throws GameException {
+    public void should_rover_be_out_bound_when_move_beyond_10_10() throws GameException {
         marRovers.setInstruction("9 9 N");
         marRovers.executeInstruction("Mm");
         expectedEx.expectMessage("rover out of bound!");
     }
 
     @Test(expected = OutOfBoundException.class)
-    public void should_rover_be_out_bound_when_move_out() throws GameException {
+    public void should_rover_be_out_bound_when_move_out_00() throws GameException {
         marRovers.setInstruction("0 0 N");
         marRovers.executeInstruction("LMm");
         expectedEx.expectMessage("rover out of bound!");
