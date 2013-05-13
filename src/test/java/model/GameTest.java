@@ -1,8 +1,6 @@
 package model;
 
-import exception.CrashException;
-import exception.GameException;
-import exception.OutOfBoundException;
+import exception.*;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -76,6 +74,51 @@ public class GameTest {
 
         game.start();
         expectedEx.expectMessage(CrashException.CRASH_TIP);
+    }
+
+
+    @Test
+    public void should_show_tip_when_input_wrong_instruction_for_plateau() throws Exception {
+        String plateauInitStr = "10 s\n" +
+                "10 10\n";
+        setSystemIn(plateauInitStr);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        game.initPlateau();
+        String standardOutput = out.toString();
+        assertThat(standardOutput ,is(PlateauInitException.PLATEAU_INIT_TIP+"\n"));
+    }
+
+    @Test
+    public void should_show_tip_when_input_wrong_place_instruction_for_rover() throws Exception {
+        String roverInitStr = "3 a E\n"
+                +"3 3 E\n"
+                + "MMRMMRMRRM\n";
+        setSystemIn(roverInitStr);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        game.start();
+        String standardOutput = out.toString();
+        assertThat(standardOutput ,is(PlaceRoverCommandException.ROVER_INIT_TIP + "\n5 1 E"));
+    }
+
+    @Test
+    public void should_show_tip_when_input_wrong_command_for_rover() throws Exception {
+        String roverInitStr = "3 3 E\n"
+                +"m67ad\n"
+                + "MMRMMRMRRM\n";
+        setSystemIn(roverInitStr);
+
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+
+        game.start();
+        String standardOutput = out.toString();
+        assertThat(standardOutput ,is(WrongCommandException.COMMAND_TIP + "\n5 1 E"));
+
     }
 
     private void setSystemIn(String input) {

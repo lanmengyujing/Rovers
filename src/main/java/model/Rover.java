@@ -20,19 +20,19 @@ public class Rover {
     }
 
     public void executeInstruction(char command) throws OutOfBoundException {
-            switch (command){
-                case 'M':
-                    forward();
-                    break;
-                case 'R':
-                    state = state.turnRight();
-                    break;
-                case 'L' :
-                    state = state.turnLeft();
-                    break;
-                default:
-                    throw new AssertionError();
-            }
+        switch (command) {
+            case 'M':
+                forward();
+                break;
+            case 'R':
+                state = state.turnRight();
+                break;
+            case 'L':
+                state = state.turnLeft();
+                break;
+            default:
+                throw new AssertionError();
+        }
     }
 
     private void forward() throws OutOfBoundException {
@@ -55,15 +55,15 @@ public class Rover {
     }
 
     private void addY(int step) throws OutOfBoundException {
-        posY+= step;
-        if(isOutRange(posX, posY)){
+        posY += step;
+        if (isOutRange(posX, posY)) {
             throw new OutOfBoundException(OutOfBoundException.OUT_OF_BOUND);
         }
     }
 
     public void addX(int step) throws OutOfBoundException {
-        posX+=step;
-        if(isOutRange(posX, posY)){
+        posX += step;
+        if (isOutRange(posX, posY)) {
             throw new OutOfBoundException(OutOfBoundException.OUT_OF_BOUND);
         }
     }

@@ -1,7 +1,8 @@
 package model;
 
 import exception.*;
-import parser.CommandParser;import parser.Parser;
+import parser.CommandParser;
+import parser.Parser;
 import parser.PlaceParser;
 import parser.PlateauParser;
 import state.*;
@@ -63,7 +64,7 @@ public class MarRovers {
 
     private void checkCrash(Rover rover) throws CrashException {
         for (Rover roverIn : roverList) {
-            if ( !(roverIn.hashCode() == rover.hashCode() && roverIn.equals(rover))
+            if (!(roverIn.hashCode() == rover.hashCode() && roverIn.equals(rover))
                     && (roverIn.getPosX() == rover.getPosX())
                     && (roverIn.getPosY() == rover.getPosY())) {
                 throw new CrashException(CrashException.CRASH_TIP);
