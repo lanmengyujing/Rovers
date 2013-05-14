@@ -1,10 +1,10 @@
 package model;
 
 import exception.*;
-import parser.CommandParser;
-import parser.Parser;
-import parser.PlaceParser;
-import parser.PlateauParser;
+import validator.CommandValidator;
+import validator.PlaceValidator;
+import validator.Validator;
+import validator.PlateauValidator;
 import state.*;
 
 import java.util.ArrayList;
@@ -16,18 +16,18 @@ public class MarRovers {
     List<Rover> roverList = new ArrayList<Rover>();
 
     public void initPlateau(String plateauStr) throws GameException {
-        Parser parser = new PlateauParser();
-        parser.matchCondition(plateauStr);
+        Validator validator = new PlateauValidator();
+        validator.matchCondition(plateauStr);
         String[] plateauInstruction = plateauStr.split(" ");
         int x = Integer.valueOf(plateauInstruction[0]);
         int y = Integer.valueOf(plateauInstruction[0]);
         plateau = new Plateau(x, y);
     }
 
-    public void setInstruction(String instructionStr) throws GameException {
+    public void initRoverState(String instructionStr) throws GameException {
         String instruction = instructionStr.toUpperCase();
-        Parser parser = new PlaceParser();
-        parser.matchCondition(instruction);
+        Validator validator = new PlaceValidator();
+        validator.matchCondition(instruction);
         String[] instructions = instruction.split(" ");
         int posX = Integer.valueOf(instructions[0]);
         int posY = Integer.valueOf(instructions[1]);
@@ -54,8 +54,8 @@ public class MarRovers {
 
     public void executeInstruction(String commandStr) throws GameException {
         commandStr = commandStr.toUpperCase();
-        Parser parser = new CommandParser();
-        parser.matchCondition(commandStr);
+        Validator validator = new CommandValidator();
+        validator.matchCondition(commandStr);
         for (char command : commandStr.toCharArray()) {
             rover.executeInstruction(command);
             checkCrash(rover);

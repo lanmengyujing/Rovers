@@ -1,11 +1,11 @@
-package parser;
+package validator;
 
 import exception.PlateauInitException;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PlateauParser implements Parser {
+public class PlateauValidator implements Validator {
     private String regEx = "^\\s*\\d*+\\s+\\d*\\s*$";
 
     public boolean matchCondition(String str) throws PlateauInitException {

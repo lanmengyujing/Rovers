@@ -1,4 +1,4 @@
-package parser;
+package validator;
 
 
 import exception.PlaceRoverCommandException;
@@ -6,7 +6,7 @@ import exception.PlaceRoverCommandException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PlaceParser implements Parser {
+public class PlaceValidator implements Validator {
     private String regEx = "^\\s*\\d*+\\s+\\d*+\\s+[N|S|W|E]\\s*$";
 
     @Override

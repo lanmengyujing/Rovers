@@ -1,8 +1,6 @@
-package parser;
+package validator;
 
-import exception.GameException;
 import exception.PlaceRoverCommandException;
-import exception.WrongCommandException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -12,14 +10,14 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class PlaceParserTest {
-    private PlaceParser parser;
+    private PlaceValidator parser;
 
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
 
     @Before
     public void setup() {
-        parser = new PlaceParser();
+        parser = new PlaceValidator();
     }
 
     @Test(expected = PlaceRoverCommandException.class)

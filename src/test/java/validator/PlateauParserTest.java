@@ -1,7 +1,6 @@
-package parser;
+package validator;
 
 import exception.PlateauInitException;
-import exception.WrongCommandException;
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
@@ -11,13 +10,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class PlateauParserTest {
-    PlateauParser parser;
+    PlateauValidator parser;
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();
 
     @Before
     public void setup(){
-        parser = new PlateauParser();
+        parser = new PlateauValidator();
     }
 
     @Test(expected = PlateauInitException.class)

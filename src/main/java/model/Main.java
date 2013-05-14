@@ -3,10 +3,10 @@ package model;
 
 public class Main {
     public static void main(String[] args) {
-        Game marsRoverGame = new Game();
-        marsRoverGame.initPlateau();
+        Client marsRoverClient = new Client();
+        marsRoverClient.initPlateau();
         while (true) {
-            marsRoverGame.start();
+            marsRoverClient.start();
         }
     }
 }

@@ -1,4 +1,4 @@
-package parser;
+package validator;
 
 import exception.GameException;
 import exception.WrongCommandException;
@@ -11,7 +11,7 @@ import static org.junit.Assert.assertThat;
 
 
 public class CommandParserTest {
-    private CommandParser parser = new CommandParser();
+    private CommandValidator parser = new CommandValidator();
 
     @Rule
     public ExpectedException expectedEx = ExpectedException.none();

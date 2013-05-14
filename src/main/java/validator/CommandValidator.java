@@ -1,4 +1,4 @@
-package parser;
+package validator;
 
 import exception.WrongCommandException;
 
@@ -6,7 +6,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 
-public class CommandParser implements Parser {
+public class CommandValidator implements Validator {
     String regEx = "^[L|M|R]*$";
 
     @Override

@@ -1,13 +1,15 @@
 package model;
 
 
+import exception.CrashException;
 import exception.GameException;
+import exception.OutOfBoundException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-public class Game {
+public class Client {
 
     private MarRovers marRovers;
     private InputStreamReader input;
@@ -15,9 +17,7 @@ public class Game {
 
     public void initPlateau() {
         marRovers = new MarRovers();
-        input = new InputStreamReader(System.in);
-        reader = new BufferedReader(input);
-
+        initReader();
         while (true) {
             String plateauInitStr = readLine();
             try {
@@ -28,16 +28,19 @@ public class Game {
             }
 
         }
+    }
 
+    private void initReader() {
+        input = new InputStreamReader(System.in);
+        reader = new BufferedReader(input);
     }
 
     public void start() {
-        input = new InputStreamReader(System.in);
-        reader = new BufferedReader(input);
+        initReader();
         while (true) {
             String roverInitStr = readLine();
             try {
-                marRovers.setInstruction(roverInitStr);
+                marRovers.initRoverState(roverInitStr);
                 break;
             } catch (GameException e) {
                 System.out.println(e.getMessage());
@@ -47,6 +50,12 @@ public class Game {
             String command = readLine();
             try {
                 marRovers.executeInstruction(command);
+                break;
+            } catch (OutOfBoundException e) {
+                System.out.println(e.getMessage());
+                break;
+            } catch (CrashException e) {
+                System.out.println(e.getMessage());
                 break;
             } catch (GameException e) {
                 System.out.println(e.getMessage());
